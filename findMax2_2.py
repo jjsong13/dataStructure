@@ -3,11 +3,9 @@
 # 출력
 # 1) 모든 원소의 합, 2) 원소의 최댓값, 3) 원소의 두 번째 최댓값을 차례대로 출력합니다. 두 번째 최댓값은 항상 존재한다고 가정합니다.
 
-# time complexity: O(3n^2)
+# time complexity: O(n^2)
 
 # source: elice.co (두 번째 최댓값)
-
-
 
 def getMax2(n, myMatrix):
     # '''
@@ -20,29 +18,27 @@ def getMax2(n, myMatrix):
     myMax = 0
     myMax2 = 0
 
+
+    count = 0
+
     for i in range(n):
         for j in range(n):
             mySum = mySum + myMatrix[i][j]
-
-            if myMax < myMatrix[i][j]:
-                myMax = myMatrix[i][j]
-
-    for k in range(n):
-        for l in range(n):
-
-            if myMatrix[k][l] == myMax :
-                myMatrix[k][l] = 0
-
-    for m in range(n):
-        for o in range(n):
-
-            if myMax2 < myMatrix[m][o]:
-                myMax2 = myMatrix[m][o]
-
+            count += 1
+            if myMatrix[i][j] > myMax2 :
+                if myMatrix[i][j] > myMax :
+                    myMax, myMax2 = myMatrix[i][j], myMax
+                elif myMatrix[i][j] == myMax :
+                    pass
+                else :
+                    myMax2 = myMatrix[i][j]
+    if count < 2:
+        myMax2 = 0
 
     return (mySum, myMax, myMax2)
 
 def main():
+
 
     n = int(input())
     myMatrix = []
